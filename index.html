@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Security Expert | Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0f;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(120, 40, 200, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(150, 50, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 90%, rgba(100, 30, 180, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border: 1px solid rgba(150, 50, 255, 0.3);
+            border-radius: 50%;
+        }
+
+        .shape-1 { width: 300px; height: 300px; top: 10%; left: 5%; }
+        .shape-2 { width: 200px; height: 200px; top: 60%; right: 10%; }
+        .shape-3 { width: 150px; height: 150px; bottom: 10%; left: 40%; }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(150, 50, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #9333ea, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #9333ea, #6366f1);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 50px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .subtitle {
+            font-size: 24px;
+            color: #a78bfa;
+            margin-bottom: 30px;
+        }
+
+        .hero-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #c4b5fd;
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #9333ea, #6366f1);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(147, 51, 234, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #9333ea;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(147, 51, 234, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+        }
+
+        .code-block {
+            background: rgba(20, 20, 30, 0.8);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            position: absolute;
+            backdrop-filter: blur(10px);
+        }
+
+        .code-block-1 {
+            top: 0;
+            left: 0;
+            width: 300px;
+        }
+
+        .code-block-2 {
+            bottom: 0;
+            right: 0;
+            width: 280px;
+        }
+
+        .code-line { color: #a78bfa; }
+        .code-keyword { color: #c084fc; }
+        .code-string { color: #8b5cf6; }
+        .code-comment { color: #6b7280; }
+
+        .section {
+            padding: 100px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: rgba(20, 20, 30, 0.6);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(147, 51, 234, 0.6);
+            box-shadow: 0 20px 40px rgba(147, 51, 234, 0.2);
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #9333ea, #6366f1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .skill-card p {
+            color: #c4b5fd;
+            line-height: 1.6;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background: rgba(20, 20, 30, 0.6);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+            border-color: rgba(147, 51, 234, 0.6);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #9333ea, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .project-content p {
+            color: #c4b5fd;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(147, 51, 234, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #c084fc;
+        }
+
+        .contact {
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(20, 20, 30, 0.6);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(147, 51, 234, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(147, 51, 234, 0.2);
+            color: #a78bfa;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 40px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+    
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <nav>
+        <div class="logo">CyberX</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Cyber Security Expert</h1>
+                <div class="subtitle">Protecting Digital Assets</div>
+                <p>Specialized in penetration testing, threat analysis, and security architecture. With over 8 years of experience securing enterprise systems and preventing cyber threats.</p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-block code-block-1">
+                    <div class="code-line"><span class="code-keyword">const</span> security = {</div>
+                    <div class="code-line">  <span class="code-keyword">encrypt</span>: <span class="code-string">'AES-256'</span>,</div>
+                    <div class="code-line">  <span class="code-keyword">firewall</span>: <span class="code-string">'active'</span>,</div>
+                    <div class="code-line">  <span class="code-keyword">status</span>: <span class="code-string">'protected'</span></div>
+                    <div class="code-line">};</div>
+                    <div class="code-line code-comment">// System secured ✓</div>
+                </div>
+                <div class="code-block code-block-2">
+                    <div class="code-line"><span class="code-keyword">if</span> (threat.detected) {</div>
+                    <div class="code-line">  <span class="code-keyword">initiate</span>.defense();</div>
+                    <div class="code-line">  <span class="code-keyword">alert</span>.admin();</div>
+                    <div class="code-line">  <span class="code-keyword">block</span>.access();</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <h2 class="section-title">Expertise Areas</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">🔐</div>
+                <h3>Penetration Testing</h3>
+                <p>Identifying vulnerabilities through ethical hacking and comprehensive security assessments.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🛡️</div>
+                <h3>Network Security</h3>
+                <p>Implementing robust firewall configurations and intrusion detection systems.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🔍</div>
+                <h3>Threat Analysis</h3>
+                <p>Real-time monitoring and analysis of potential security threats and breaches.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <h3>Secure Coding</h3>
+                <p>Developing secure applications with best practices and vulnerability prevention.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🔒</div>
+                <h3>Encryption</h3>
+                <p>Implementing advanced encryption protocols to protect sensitive data.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">⚡</div>
+                <h3>Incident Response</h3>
+                <p>Rapid response to security incidents with effective mitigation strategies.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img">🏢</div>
+                <div class="project-content">
+                    <h3>Enterprise Security Suite</h3>
+                    <p>Developed comprehensive security framework for Fortune 500 company, reducing vulnerabilities by 85%.</p>
+                    <div class="project-tags">
+                        <span class="tag">Firewall</span>
+                        <span class="tag">IDS/IPS</span>
+                        <span class="tag">SIEM</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-img">🔓</div>
+                <div class="project-content">
+                    <h3>Vulnerability Scanner</h3>
+                    <p>Built automated scanning tool that identifies and reports security weaknesses across networks.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Nmap</span>
+                        <span class="tag">AI</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-img">🌐</div>
+                <div class="project-content">
+                    <h3>Zero-Trust Architecture</h3>
+                    <p>Implemented zero-trust security model for cloud infrastructure with multi-factor authentication.</p>
+                    <div class="project-tags">
+                        <span class="tag">Cloud</span>
+                        <span class="tag">IAM</span>
+                        <span class="tag">MFA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 CyberX Security. All rights reserved.</p>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero animations
+        gsap.from('.hero-text h1', {
+            opacity: 0,
+            y: 100,
+            duration: 1,
+            ease: 'power4.out'
+        });
+
+        gsap.from('.hero-text .subtitle', {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            delay: 0.3,
+            ease: 'power4.out'
+        });
+
+        gsap.from('.hero-text p', {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            delay: 0.5,
+            ease: 'power4.out'
+        });
+
+        gsap.from('.cta-buttons', {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            delay: 0.7,
+            ease: 'power4.out'
+        });
+
+        gsap.from('.code-block-1', {
+            opacity: 0,
+            x: -100,
+            duration: 1,
+            delay: 0.9,
+            ease: 'power4.out'
+        });
+
+        gsap.from('.code-block-2', {
+            opacity: 0,
+            x: 100,
+            duration: 1,
+            delay: 1.1,
+            ease: 'power4.out'
+        });
+
+        // Floating shapes animation
+        gsap.to('.shape-1', {
+            y: 30,
+            x: 20,
+            rotation: 360,
+            duration: 20,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+        });
+
+        gsap.to('.shape-2', {
+            y: -40,
+            x: -30,
+            rotation: -360,
+            duration: 25,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+        });
+
+        gsap.to('.shape-3', {
+            y: 20,
+            x: 40,
+            rotation: 360,
+            duration: 22,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+        });
+
+        // Skills cards animation
+        gsap.from('.skill-card', {
+            scrollTrigger: {
+                trigger: '.skills-grid',
+                start: 'top 80%',
+            },
+            opacity: 0,
+            y: 100,
+            stagger: 0.2,
+            duration: 0.8,
+            ease: 'power4.out'
+        });
+
+        // Projects animation
+        gsap.from('.project-card', {
+            scrollTrigger: {
+                trigger: '.projects-grid',
+                start: 'top 80%',
+            },
+            opacity: 0,
+            scale: 0.8,
+            stagger: 0.2,
+            duration: 0.8,
+            ease: 'back.out(1.7)'
+        });
+
+        // Contact form animation
+        gsap.from('.contact-form .form-group', {
+            scrollTrigger: {
+                trigger: '.contact-form',
+                start: 'top 80%',
+            },
+            opacity: 0,
+            x: -50,
+            stagger: 0.2,
+            duration: 0.8,
+            ease: 'power4.out'
+        });
+
+        // Section title animations
+        gsap.utils.toArray('.section-title').forEach(title => {
+            gsap.from(title, {
+                scrollTrigger: {
+                    trigger: title,
+                    start: 'top 85%',
+                },
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: 'power4.out'
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Message sent! (This is a demo)');
+        });
+    </script>
+</body>
+</html>
